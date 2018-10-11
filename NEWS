@@ -1,6 +1,9 @@
 Next Release
 ============
 
+Features:
+  * TODO: OpenSSL 1.1.1, new function mongoc_stream_timed_out, new mongoc_stream_t field.
+
 Bug fixes:
 
   * mongoc_collection_update_many and mongoc_collection_delete_many would fail

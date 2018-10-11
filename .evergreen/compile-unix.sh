@@ -92,7 +92,6 @@ RELEASE_FLAGS="${DEBUG_AND_RELEASE_FLAGS} -DCMAKE_BUILD_TYPE=RelWithDebInfo"
 
 DIR=$(dirname $0)
 . $DIR/find-cmake.sh
-. $DIR/set-path.sh
 
 # --strip-components is an GNU tar extension. Check if the platform
 # has GNU tar installed as `gtar`, otherwise we assume to be on
@@ -192,13 +191,16 @@ else
    $CMAKE $CONFIGURE_FLAGS
 fi
 
+$SCAN_BUILD make -j8 all
+
+. $DIR/add-build-dirs-to-paths.sh
+
 openssl version
 if [ -n "$SSL_VERSION" ]; then
    openssl version | grep -q $SSL_VERSION
 fi
 # This should fail when using fips capable OpenSSL when fips mode is enabled
 openssl md5 README.rst || true
-$SCAN_BUILD make -j8 all
 
 ulimit -c unlimited || true
 
