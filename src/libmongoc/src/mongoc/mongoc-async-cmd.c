@@ -330,6 +330,10 @@ _mongoc_async_cmd_phase_send (mongoc_async_cmd_t *acmd)
       bson_free (iovec);
    }
 
+   if (bytes <= 0 && mongoc_stream_should_retry (acmd->stream)) {
+      return MONGOC_ASYNC_CMD_IN_PROGRESS;
+   }
+
    if (bytes < 0) {
       bson_set_error (&acmd->error,
                       MONGOC_ERROR_STREAM,
