@@ -64,7 +64,7 @@ struct _mongoc_stream_t {
    void (*failed) (mongoc_stream_t *stream);
    bool (*timed_out) (mongoc_stream_t *stream);
    bool (*should_retry) (mongoc_stream_t *stream);
-   void *padding[4];
+   void *padding[3];
 };
 
 
